@@ -1,0 +1,11 @@
+{
+  "display_name": "thinking 标签正文开头注入",
+  "loading_order": 99,
+  "requires": ["JS-Slash-Runner"],
+  "optional": [],
+  "js": "index.js",
+  "css": "",
+  "author": "rocholin",
+  "version": "1.0.0",
+  "homePage": "https://github.com/rocholin/1"
+}

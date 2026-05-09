@@ -4,8 +4,19 @@
 
 ## 文件说明
 
-- `index.js`：酒馆助手可直接远程导入的构建产物。
+- `manifest.json`：SillyTavern 第三方扩展安装信息。
+- `index.js`：扩展加载时执行的构建产物。
 - `source/index.ts`：原始 TypeScript 源码备份。
+
+## 按扩展安装
+
+在 SillyTavern 的第三方扩展安装窗口中输入：
+
+```text
+https://github.com/rocholin/1
+```
+
+分支可填 `main`，也可以留空。
 
 ## 酒馆助手脚本库用法
 
