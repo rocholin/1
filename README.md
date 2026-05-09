@@ -1,6 +1,6 @@
 # thinking 标签正文开头注入
 
-酒馆助手脚本：每次生成请求前，用 `injectPrompts` API 在聊天末尾预填 `<thinking>` 作为助手回复 prefill，让模型从 `<thinking>` 开始续写。
+酒馆助手脚本：监听 `MESSAGE_RECEIVED` 事件，在每次 AI 回复生成后自动检查最新助手消息是否以 `<thinking>` 开头；如果模型漏掉了，就自动补写到正文开头，确保正则能稳定隐藏思维链。
 
 ## 文件说明
 
@@ -24,4 +24,7 @@ import 'https://raw.githubusercontent.com/rocholin/1/main/index.js';
 
 ## 原理
 
-使用酒馆助手的 `injectPrompts` API，注册一条 `role: 'assistant'` 的提示词注入到聊天末尾（`depth: 0`），内容就是 `<thinking>\n`。每次 AI 生成回复时，这条 prefill 会被拼接到消息末尾，模型会从 `<thinking>` 开头自然续写。
+监听酒馆事件 `tavern_events.MESSAGE_RECEIVED`。每当 AI 生成完成时：
+1. 获取当前最新助手楼层的消息正文；
+2. 如果正文不是以 `<thinking>` 开头（模型漏写了），则用 `setChatMessages` 将 `<thinking>\n` 补写到正文开头；
+3. 如果已经以 `<thinking>` 开头，则不做任何操作。
